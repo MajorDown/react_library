@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const MetronomeComponent = () => {
+const VisualTap = () => {
   const [bpm, setBpm] = useState(120);
   const [intervalId, setIntervalId] = useState(null);
   const [isTapping, setIsTapping] = useState(false);
@@ -122,4 +122,4 @@ const MetronomeComponent = () => {
   );
 };
 
-export default MetronomeComponent;
+export default VisualTap;
