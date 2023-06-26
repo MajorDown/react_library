@@ -1,56 +1,54 @@
 import React, { useRef } from "react";
 
-const Carousel = ({ src, numberOfView, id }) => {
-  // HOOKS / PROPS
+const style = {
+  carousel: {
+    width: "100%",
+    display: "flex",
+  },
+  btnPrev: {
+    background: "none",
+    border: "none",
+  },
+  btnNext: {
+    background: "none",
+    border: "none",
+  },
+  carouselContent: {
+    maxWidth: "200px",
+    maxHeight: "200px",
+    overflow: "hidden",
+    display: "flex",
+    scrollBehavior: "smooth",
+    borderRadius: "10px",
+  },
+  imgContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "100%",
+  },
+  img: {
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+};
+
+const Carousel = ({ src, id }) => {
   const carouselRef = useRef(null);
-  const imgWidth = 100 / numberOfView;
 
-  // STYLE
-  const style = {
-    carouselContent: {
-      position: "relative",
-      width: "100%",
-      overflowX: "auto",
-      whiteSpace: "nowrap",
-    },
-    imgContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      aspectRatio: "1/1",
-      width: `${imgWidth}%`,
-    },
-    imgContent: {
-      maxWidth: "100%",
-      maxHeight: "100%",
-      padding: "1px",
-    },
-    prev: {
-      position: "fixed",
-      top: "50%",
-      transform: "translateY(-50%)",
-    },
-    next: {
-      position: "fixed",
-      left: "100%",
-      tranform: "translateX(-100%)",
-      top: "50%",
-      transform: "translateY(-50%)",
-    },
-  };
-
-  // HANDLERS
   const handlePrev = () => {
-    carouselRef.current.scrollLeft -= carouselRef.current.offsetWidth;
-  };
-  const handleNext = () => {
-    carouselRef.current.scrollLeft += carouselRef.current.offsetWidth;
+    const container = carouselRef.current;
+    container.scrollLeft -= container.offsetWidth;
   };
 
-  // RENDER
+  const handleNext = () => {
+    const container = carouselRef.current;
+    container.scrollLeft += container.offsetWidth;
+  };
+
   return (
-    <div className="carousel" id={id}>
-      <button className="btn-prev" onClick={handlePrev} style={style.prev}>
+    <div className="carousel" id={id} style={style.carousel}>
+      <button className="btn-prev" onClick={handlePrev} style={style.btnPrev}>
         <svg viewBox="0 -960 960 960">
           <path
             onClick={handlePrev}
@@ -59,22 +57,21 @@ const Carousel = ({ src, numberOfView, id }) => {
         </svg>
       </button>
       <div
-        className="carousel-Content"
+        className="carousel-content"
         ref={carouselRef}
         style={style.carouselContent}
       >
         {src.map((imageUrl, index) => (
-          <div className="img-Container" style={style.imgContainer}>
+          <div className="img-container" key={index} style={style.imgContainer}>
             <img
-              style={style.imgContent}
-              key={index}
               src={imageUrl}
               alt={`Carousel Image ${index + 1}`}
+              style={style.img}
             />
           </div>
         ))}
       </div>
-      <button className="btn-next" onClick={handleNext} style={style.next}>
+      <button className="btn-next" onClick={handleNext} style={style.btnNext}>
         <svg viewBox="0 -960 960 960">
           <path
             onClick={handleNext}
