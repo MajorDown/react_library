@@ -55,7 +55,12 @@ const ToggleButton = ({ onToggle, title, color }) => {
       <div className="toggleBox" style={style} onClick={() => toggle()}>
         <div
           className="toggle"
-          style={{ width: "10px", height: "10px", backgroundColor: `${color}` }}
+          style={{
+            width: "10px",
+            height: "10px",
+            backgroundColor: `${color}`,
+            color: `${color}`,
+          }}
           onClick={() => toggle()}
         >
           .
